@@ -24,7 +24,14 @@ export const MatrixText = ({ text = "HelloWorld!", className, initialDelay = 200
     const animate = () => { if (i >= text.length) { setIsAnimating(false); return; } animateLetter(i); i++; setTimeout(animate, letterInterval); };
     animate();
   }, [animateLetter, text, isAnimating, letterInterval]);
+  // Avvio iniziale
   useEffect(() => { const t = setTimeout(startAnimation, initialDelay); return () => clearTimeout(t); }, []);
+  // Loop: quando isAnimating torna false, rilancia dopo 2s
+  useEffect(() => {
+    if (isAnimating) return;
+    const t = setTimeout(startAnimation, 2000);
+    return () => clearTimeout(t);
+  }, [isAnimating]);
   const motionVariants = useMemo(() => ({ matrix: { color: "#60a5fa", textShadow: "0 2px 12px rgba(96,165,250,0.8)" } }), []);
   return (
     <div className={cn("flex items-center justify-center", className)} aria-label="Matrix text animation">

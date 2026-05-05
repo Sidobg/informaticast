@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { VariantProps, cva } from "class-variance-authority";
 
 const buttonVariants = cva(
-    "relative group border text-foreground mx-auto text-center rounded-full",
+    "relative group border text-white mx-auto text-center rounded-full",
     {
         variants: {
             variant: {

@@ -117,7 +117,9 @@ function Hero() {
             Assistenza informatica professionale a Clusone dal 2000
           </p>
           <a href="#servizi">
-            <Button size="lg" variant="default">Scopri i nostri servizi</Button>
+            <Button size="lg" variant="default" className="text-white font-semibold tracking-widest uppercase text-sm px-12 py-3">
+              Scopri i nostri servizi
+            </Button>
           </a>
         </div>
 

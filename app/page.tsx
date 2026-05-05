@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 import SphereHero from "@/components/sphere-hero";
 import { MatrixText } from "@/components/ui/matrix-text";
 import { Button } from "@/components/ui/neon-button";
+import { FeatureCarousel } from "@/components/ui/animated-feature-carousel";
+import type { ImageSet } from "@/components/ui/animated-feature-carousel";
 
 // ─── Fade-in hook ───────────────────────────────────────────────────────────
 function useFadeIn() {
@@ -142,14 +144,15 @@ function Hero() {
 }
 
 // ─── Servizi ─────────────────────────────────────────────────────────────────
-const services = [
-  { icon: "🖥️", title: "Riparazione Computer", desc: "Diagnosi e riparazione PC desktop e portatili di qualsiasi marca e modello." },
-  { icon: "📱", title: "Smartphone & Tablet", desc: "Riparazione display, sostituzione batterie e recupero dati su dispositivi mobili." },
-  { icon: "🖨️", title: "Stampanti", desc: "Assistenza e riparazione stampanti, plotter e periferiche di stampa." },
-  { icon: "🏢", title: "Assistenza Aziende", desc: "Supporto IT on-site per aziende e professionisti: reti, server e workstation." },
-  { icon: "🛒", title: "Vendita Hardware", desc: "PC, notebook, smartphone, tablet, accessori e componenti originali." },
-  { icon: "🌐", title: "Siti Internet", desc: "Realizzazione siti web professionali per aziende e attività locali della Val Seriana." },
-];
+const imagesServizi: ImageSet = {
+  step1img1: "https://images.unsplash.com/photo-1587058680270-0ab9c6e0b9f6?w=800",
+  step1img2: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+  step2img1: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=800",
+  step2img2: "https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=800",
+  step3img:  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800",
+  step4img:  "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=800",
+  step5img:  "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800",
+};
 
 function Servizi() {
   const ref = useFadeIn();
@@ -157,24 +160,13 @@ function Servizi() {
     <section
       id="servizi"
       ref={ref as React.RefObject<HTMLElement>}
-      className="fade-in-section bg-[#050f1f] py-24 px-4"
+      className="fade-in-section py-24 bg-[#050f1f]"
     >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+      <div className="max-w-5xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-white text-center mb-16 tracking-tight">
           I nostri servizi
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map(({ icon, title, desc }) => (
-            <div
-              key={title}
-              className="bg-blue-950/40 border border-blue-800/30 rounded-xl p-6 hover:border-blue-500/50 hover:bg-blue-900/30 transition-all"
-            >
-              <div className="text-4xl mb-3">{icon}</div>
-              <h3 className="text-white font-semibold text-lg mb-2">{title}</h3>
-              <p className="text-[#8a9ab0] text-sm leading-relaxed">{desc}</p>
-            </div>
-          ))}
-        </div>
+        <FeatureCarousel image={imagesServizi} />
       </div>
     </section>
   );

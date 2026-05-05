@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import SphereHero from "@/components/sphere-hero";
 import { MatrixText } from "@/components/ui/matrix-text";
+import { Button } from "@/components/ui/neon-button";
 
 // ─── Fade-in hook ───────────────────────────────────────────────────────────
 function useFadeIn() {
@@ -78,11 +79,8 @@ function Navbar() {
             </a>
           ))}
         </div>
-        <a
-          href="tel:0346060642"
-          className="bg-blue-700 hover:bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
-        >
-          Chiamaci ora
+        <a href="tel:0346060642">
+          <Button variant="solid" size="sm">Chiamaci ora</Button>
         </a>
       </div>
     </nav>
@@ -118,20 +116,9 @@ function Hero() {
           <p className="text-[#8a9ab0] text-lg md:text-xl max-w-lg">
             Assistenza informatica professionale a Clusone dal 2000
           </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href="tel:0346060642"
-              className="bg-blue-700 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
-              Chiama ora 0346-060642
-            </a>
-            <a
-              href="#servizi"
-              className="border border-white/40 hover:border-white text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
-              Scopri i servizi
-            </a>
-          </div>
+          <a href="#servizi">
+            <Button size="lg" variant="default">Scopri i nostri servizi</Button>
+          </a>
         </div>
 
         {/* Badge in fondo alla hero */}
@@ -330,12 +317,9 @@ function Contatti() {
               placeholder="Il tuo messaggio..."
               className="bg-blue-950/40 border border-blue-800/40 rounded-lg px-4 py-3 text-white placeholder:text-[#8a9ab0] focus:outline-none focus:border-blue-500 transition-colors resize-none"
             />
-            <button
-              type="submit"
-              className="bg-blue-700 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
+            <Button type="submit" variant="solid" size="lg" className="w-full">
               Invia messaggio
-            </button>
+            </Button>
           </form>
         </div>
 

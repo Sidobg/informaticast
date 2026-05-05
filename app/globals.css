@@ -130,6 +130,15 @@
   }
 }
 
+/* Sphere continuous rotation — separate from mouse tilt */
+@keyframes spin-globe {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+.animate-spin-globe {
+  animation: spin-globe 240s linear infinite;
+}
+
 /* Wireframe sphere 3D */
 .wireframe-line {
   position: absolute;

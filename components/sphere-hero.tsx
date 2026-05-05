@@ -78,8 +78,14 @@ export default function SphereHero() {
       <div className="absolute inset-0" style={{ transform: baseTranslate, backgroundImage: `radial-gradient(at 50% 50%, rgba(${CONFIG.primaryColor}, 0.12) 0%, #030d1a 90%)` }}>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ width: 400, height: 400, backgroundImage: `radial-gradient(circle, rgba(${CONFIG.secondaryColor}, 0.45) 0%, transparent 70%)`, filter: `blur(${CONFIG.coreBlur}px)` }} />
       </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none" style={{ width: 700, height: 700 }}>
-        <div className="relative w-full h-full animate-spin" style={{ transform: tiltTranslate, animationDuration: CONFIG.sphereRotationDuration, transformStyle: "preserve-3d" }}>
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
+        style={{ width: 700, height: 700, transform: tiltTranslate, transformStyle: "preserve-3d", transition: "transform 0.1s ease-out" }}
+      >
+        <div
+          className="relative w-full h-full animate-spin-globe"
+          style={{ animationDuration: CONFIG.sphereRotationDuration, animationTimingFunction: "linear", animationIterationCount: "infinite", transformStyle: "preserve-3d" }}
+        >
           {sphereRings}
         </div>
       </div>

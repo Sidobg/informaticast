@@ -92,7 +92,7 @@ function Navbar() {
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden flex flex-col text-center px-4">
+    <section className="hero-section relative w-full overflow-hidden flex flex-col text-center px-4">
       {/* Sfera: copre tutto lo spazio hero, inclusa la zona badge */}
       <SphereHero />
 

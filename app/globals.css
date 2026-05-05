@@ -150,3 +150,14 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Hero section: 100svh con fallback per iOS */
+.hero-section {
+  height: 100svh;
+  min-height: 600px;
+}
+@supports not (height: 100svh) {
+  .hero-section {
+    height: 100vh;
+  }
+}

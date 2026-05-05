@@ -18,9 +18,18 @@ const CONFIG = {
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 export default function SphereHero() {
+  const [isMobile, setIsMobile] = useState(false);
   const [targetMousePos, setTargetMousePos] = useState({ x: 0, y: 0 });
   const currentMousePos = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number>(0);
+
+  // Detect mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const animateLerp = useCallback(() => {
     currentMousePos.current.x = lerp(currentMousePos.current.x, targetMousePos.x, CONFIG.lerpFactor);
@@ -29,8 +38,16 @@ export default function SphereHero() {
     animationFrameRef.current = requestAnimationFrame(animateLerp);
   }, [targetMousePos.x, targetMousePos.y]);
 
-  useEffect(() => { animationFrameRef.current = requestAnimationFrame(animateLerp); return () => cancelAnimationFrame(animationFrameRef.current); }, [animateLerp]);
+  // Parallax loop — disabled on mobile
   useEffect(() => {
+    if (isMobile) return;
+    animationFrameRef.current = requestAnimationFrame(animateLerp);
+    return () => cancelAnimationFrame(animationFrameRef.current);
+  }, [animateLerp, isMobile]);
+
+  // Mouse move — disabled on mobile
+  useEffect(() => {
+    if (isMobile) return;
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
       const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
@@ -38,9 +55,12 @@ export default function SphereHero() {
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
-  const { x: smoothX, y: smoothY } = currentMousePos.current;
+  // On mobile smoothX/Y stay fixed at 0
+  const smoothX = isMobile ? 0 : currentMousePos.current.x;
+  const smoothY = isMobile ? 0 : currentMousePos.current.y;
+
   const baseTranslate = `translate3d(${smoothX * CONFIG.parallaxDepth}px, ${smoothY * CONFIG.parallaxDepth}px, 0)`;
   const gridTranslate = `translate3d(${-smoothX * (CONFIG.parallaxDepth / 2)}px, ${-smoothY * (CONFIG.parallaxDepth / 2)}px, 0)`;
   const hazeTranslate = `translate3d(${smoothX * (CONFIG.parallaxDepth / 2)}px, ${smoothY * (CONFIG.parallaxDepth / 2)}px, 0)`;
